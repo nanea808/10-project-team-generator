@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/nanea808/10-project-team-generator/issues"
   },
-  "homepage": "https://github.com/nanea808/10-project-team-generator#readme"
+  "homepage": "https://github.com/nanea808/10-project-team-generator#readme",
+  "dependencies": {
+    "inquirer": "^9.1.4"
+  }
 }
