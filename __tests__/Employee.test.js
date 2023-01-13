@@ -1,4 +1,4 @@
-const { Employee } = require('./lib/employee.js');
+const { Employee } = require('../lib/classes');
 
 describe('Employee', () => {
     describe('Initialization', () => {
@@ -12,6 +12,10 @@ describe('Employee', () => {
             expect(obj.name).toEqual(name);
             expect(obj.id).toEqual(id);
             expect(obj.email).toEqual(email);
+            expect(obj.getName()).toEqual(name);
+            expect(obj.getId()).toEqual(id);
+            expect(obj.getEmail()).toEqual(email);
+            expect(obj.getRole()).toEqual('Employee');
         });
     });
 });

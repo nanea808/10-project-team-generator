@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nanea808/10-project-team-generator#readme",
   "dependencies": {
-    "inquirer": "^8.2.5"
+    "inquirer": "^8.2.5",
+    "jest": "^29.3.1"
   }
 }
