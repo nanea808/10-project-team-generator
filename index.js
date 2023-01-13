@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Employee, Intern } = require('./lib/employee.js');
+const { Employee, Manager, Engineer, Intern } = require('./lib/employee.js');
 
 const intern = new Intern('Ethan', '1', 'willers.enw@gmail.com', 'UofO');
 
