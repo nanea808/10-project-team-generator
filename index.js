@@ -1,61 +1,58 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Employee, Manager, Engineer, Intern } = require('./lib/employee.js');
+const { Employee, Manager, Engineer, Intern } = require('./lib/classes.js');
 
-const intern = new Intern('Ethan', '1', 'willers.enw@gmail.com', 'UofO');
+const employees = [];
 
-console.log(intern.getRole());
-console.log(intern.getName());
+const questions1 = [
+    // Prompt for managers name, employee ID, email address, and office number
 
-// const questions = [
-//     {
-//         type: 'input',
-//         name: 'title',
-//         message: 'Enter Project Title:'
-//     },
-//     {
-//         type: 'input',
-//         message: 'Enter Project Description:',
-//         name: 'description'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'install',
-//         message: 'Enter Installation Instructions:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'usage',
-//         message: 'Enter Usage Instructions:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'contribution',
-//         message: 'Enter Contribution Guidelines:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'test',
-//         message: 'Enter Test Instructions:'
-//     },
-//     {
-//         type: 'list',
-//         name: 'license',
-//         message: 'Pick a license:',
-//         choices: ['ISC', 'MIT']
-//     }
-// ];
+];
 
-// inquirer
-//     .prompt(questions)
-//     .then((answers) => {
-//         const readmeText = buildReadme(answers.title, answers.description, answers.install, answers.usage, answers.contribution, answers.test, answers.license);
-//         fs.writeFileSync(`db/README.md`, readmeText);
-//     })
-//     .catch((error) => {
-//         if (error.isTtyError) {
-//             // Prompt couldn't be rendered in the current environment
-//           } else {
-//             // Something else went wrong
-//           }
-//     });
+const questions2 = [
+    // Prompt to add engineer or intern
+    {
+        type: 'list',
+        name: 'internOrEngineer',
+        message: "Would you like to add an intern or engineer to the team?",
+        choices: [
+            'Engineer',
+            'Intern',
+            new inquirer.Separator(),
+            'exit'
+        ]
+    }
+];
+
+inquirer.prompt(questions1).then((answers) => {
+    // Make Manager object
+
+    // Push object to employees array
+
+    ask();
+});
+
+function ask() {
+    inquirer.prompt(questions2).then((answers) => {
+        const nextTimeMessage = 'Would you like to add another intern or engineer to the team?'
+        if (answers.internOrEngineer === 'Engineer') {
+            // Create Engineer object
+
+            // Push object to employees array
+
+            questions2[0].message = nextTimeMessage;
+            ask();
+        } else if (answers.internOrEngineer === 'Intern') {
+            // Create Intern object
+
+            // Push object to employees array
+
+            questions2[0].message = nextTimeMessage;
+            ask();
+        } else {
+            // exit
+        }
+    });
+}
+
+
