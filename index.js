@@ -23,9 +23,11 @@ const engIntRecursive = [
 inquirer.prompt(managerQuestions).then((answers) => {
     // Make Manager object
     const managerObj = new Manager(answers.managerName, answers.managerEmployeeID, answers.managerEmail, answers.managerOfficeNum);
+    
     // Push object to employees array
     employees.push(managerObj);
     console.log(`\n${JSON.stringify(employees)}\n`);
+
     ask();
 });
 
@@ -35,26 +37,30 @@ function ask() {
         if (answers.internOrEngineer === 'Engineer') {
             inquirer.prompt(engineerQuestions).then((answers) => {
                 // Create Engineer object
+                const engineerObj = new Engineer(answers.engineerName, answers.engineerEmployeeID, answers.engineerEmail, answers.engineerGitHub);
                 
                 // Push object to employees array
+                employees.push(engineerObj);
+                console.log(`\n${JSON.stringify(employees)}\n`);
 
-                console.log('\n');
                 engIntRecursive[0].message = nextTimeMessage;
                 ask();
             });
         } else if (answers.internOrEngineer === 'Intern') {
             inquirer.prompt(internQuestions).then((answers) => {
                 // Create Intern object
-                
-                // Push object to employees array
+                const internObj = new Intern(answers.internName, answers.internEmployeeID, answers.internEmail, answers.internSchool);
 
-                console.log('\n');
+                // Push object to employees array
+                employees.push(internObj);
+                console.log(`\n${JSON.stringify(employees)}\n`);
+
                 engIntRecursive[0].message = nextTimeMessage;
                 ask();
             });
         } else {
             // exit
-            console.log('\nSending HTML data!')
+            console.log('\nSending HTML data!');
         }
     });
 }
