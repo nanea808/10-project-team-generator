@@ -22,10 +22,10 @@ const engIntRecursive = [
 
 inquirer.prompt(managerQuestions).then((answers) => {
     // Make Manager object
-
+    const managerObj = new Manager(answers.managerName, answers.managerEmployeeID, answers.managerEmail, answers.managerOfficeNum);
     // Push object to employees array
-
-    console.log('\n');
+    employees.push(managerObj);
+    console.log(`\n${JSON.stringify(employees)}\n`);
     ask();
 });
 
