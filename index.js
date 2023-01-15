@@ -1,61 +1,62 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { Employee, Manager, Engineer, Intern } = require('./lib/employee.js');
+const { Employee, Manager, Engineer, Intern } = require('./lib/classes.js');
+const { managerQuestions, engineerQuestions, internQuestions } = require('./lib/questions.js')
 
-const intern = new Intern('Ethan', '1', 'willers.enw@gmail.com', 'UofO');
+const employees = [];
 
-console.log(intern.getRole());
-console.log(intern.getName());
+const engIntRecursive = [
+    // Prompt to add engineer or intern
+    {
+        type: 'list',
+        name: 'internOrEngineer',
+        message: "Would you like to add an engineer or intern to the team?",
+        choices: [
+            'Engineer',
+            'Intern',
+            new inquirer.Separator(),
+            'exit'
+        ]
+    }
+];
 
-// const questions = [
-//     {
-//         type: 'input',
-//         name: 'title',
-//         message: 'Enter Project Title:'
-//     },
-//     {
-//         type: 'input',
-//         message: 'Enter Project Description:',
-//         name: 'description'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'install',
-//         message: 'Enter Installation Instructions:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'usage',
-//         message: 'Enter Usage Instructions:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'contribution',
-//         message: 'Enter Contribution Guidelines:'
-//     },
-//     {
-//         type: 'editor',
-//         name: 'test',
-//         message: 'Enter Test Instructions:'
-//     },
-//     {
-//         type: 'list',
-//         name: 'license',
-//         message: 'Pick a license:',
-//         choices: ['ISC', 'MIT']
-//     }
-// ];
+inquirer.prompt(managerQuestions).then((answers) => {
+    // Make Manager object
 
-// inquirer
-//     .prompt(questions)
-//     .then((answers) => {
-//         const readmeText = buildReadme(answers.title, answers.description, answers.install, answers.usage, answers.contribution, answers.test, answers.license);
-//         fs.writeFileSync(`db/README.md`, readmeText);
-//     })
-//     .catch((error) => {
-//         if (error.isTtyError) {
-//             // Prompt couldn't be rendered in the current environment
-//           } else {
-//             // Something else went wrong
-//           }
-//     });
+    // Push object to employees array
+
+    console.log('\n');
+    ask();
+});
+
+function ask() {
+    inquirer.prompt(engIntRecursive).then((answers) => {
+        const nextTimeMessage = 'Would you like to add another engineer or intern to the team?'
+        if (answers.internOrEngineer === 'Engineer') {
+            inquirer.prompt(engineerQuestions).then((answers) => {
+                // Create Engineer object
+                
+                // Push object to employees array
+
+                console.log('\n');
+                engIntRecursive[0].message = nextTimeMessage;
+                ask();
+            });
+        } else if (answers.internOrEngineer === 'Intern') {
+            inquirer.prompt(internQuestions).then((answers) => {
+                // Create Intern object
+                
+                // Push object to employees array
+
+                console.log('\n');
+                engIntRecursive[0].message = nextTimeMessage;
+                ask();
+            });
+        } else {
+            // exit
+            console.log('\nSending HTML data!')
+        }
+    });
+}
+
+
