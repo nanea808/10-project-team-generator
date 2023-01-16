@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const { Employee, Manager, Engineer, Intern } = require('./lib/classes.js');
 const { managerQuestions, engineerQuestions, internQuestions } = require('./lib/questions.js')
+const buildHTML = require('./lib/html-builder.js');
 
 const employees = [];
 
@@ -61,6 +62,7 @@ function ask() {
         } else {
             // exit
             console.log('\nSending HTML data!');
+            buildHTML(employees);
         }
     });
 }
